@@ -1,0 +1,36 @@
+;;version:0.190906
+;;程序的功能是画一条长度为5的流水线，用于基于中国标准制图规范道路工程设计中总体图的绘制。190906
+;;大部分的代码参考了简书中“吴吉光”的教程的示例代码。
+;;https://www.jianshu.com/p/2f8197adebea
+;;The program can make a liushuixian on cadmodle.Liushuixian is a typical line,mostly be used in master drawing of the civilization that based on Chinese standard.(The Chinese version shall prevail.)
+;;Mostly of code from https://www.jianshu.com/p/2f8197adebea.
+
+(defun c:zjxlsx()
+(setq point1 (getpoint "\n请输入流水线箭尾:"))
+(setq point2 (getpoint "\n请选择流水线指向:"))
+(setq
+  alpha (angle point1 point2)
+ )
+(setq  pointa point1)
+(setq
+  pointA point1
+  pointB (polar pointA alpha 5)
+  point3 (polar pointA alpha 3.43)
+  pointC (polar point3 (+ alpha (/ pi 2)) 0.33)
+  pointD (polar point3 (- alpha (/ pi 2)) 0.33)
+)
+(command "pline" pointA pointB pointC pointB pointD nil)
+(princ)
+)
+
+;;开发中，虽然是修改别人的代码，但是还是有很多次报错。具体总结如下
+;;错误: 输入的列表有缺陷
+;;错误代码：(setq (alpha (angle point1 point2))
+;;导致setq函数找不到能够给(alpha (angle point1 point2))变量赋值的数据。显然是错的，多了一对括号。
+;;错误: 函数错误: (2663.29 1618.62 0.0)
+;;(setq pointA (point1))
+;;还是多了一对括号。这对括号导致系统寻找名为point1的函数。显然是找不到的。
+;;错误: no function definition: +ALPHA
+;;缺少空格
+;;错误: 函数错误: 0.33
+;;多了括号
