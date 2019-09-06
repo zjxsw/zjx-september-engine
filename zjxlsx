@@ -1,4 +1,4 @@
-;;version:0.190906
+;;version:0.190906 code:GB2312 file extensions:lsp
 ;;程序的功能是画一条长度为5的流水线，用于基于中国标准制图规范道路工程设计中总体图的绘制。190906
 ;;大部分的代码参考了简书中“吴吉光”的教程的示例代码。
 ;;https://www.jianshu.com/p/2f8197adebea
